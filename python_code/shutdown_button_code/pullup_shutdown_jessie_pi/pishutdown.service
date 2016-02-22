@@ -1,0 +1,12 @@
+[Service]
+ExecStart=/usr/bin/python /home/pi/shutdown/pishutdown.py
+WorkingDirectory=/home/pi/shutdown/
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=pishutdown
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
