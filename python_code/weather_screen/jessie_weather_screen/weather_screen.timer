@@ -1,0 +1,11 @@
+[Unit]
+Description=Runs weather_screen every 5 mins
+
+[Timer]
+OnBootSec=1min
+#OnUnitActiveSec=5min
+OnCalendar=*:0,15,30,45:*
+Unit=weather_screen.service
+
+[Install]
+WantedBy=multi-user.target
