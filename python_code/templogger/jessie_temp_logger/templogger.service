@@ -1,0 +1,6 @@
+[Unit]
+Description=TempLogger
+
+[Service]
+Type=simple
+ExecStart=/home/pi/templogger.py

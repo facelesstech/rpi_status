@@ -1,0 +1,10 @@
+[Unit]
+Description=Runs templogger every 15 mins
+
+[Timer]
+OnBootSec=1min
+OnCalendar=*:0,15,30,45
+Unit=templogger.service
+
+[Install]
+WantedBy=multi-user.target
