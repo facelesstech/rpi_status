@@ -106,7 +106,7 @@ class basicWeather(object):
             strip.show()
 
         elif 0 < temp_c <= 10:
-            strip.setPixelColorRGB(0,0,127,127) # Aqua    
+            strip.setPixelColorRGB(0,127,0,127) # Aqua    
             strip.show()
 
         elif 10 < temp_c <= 20:
