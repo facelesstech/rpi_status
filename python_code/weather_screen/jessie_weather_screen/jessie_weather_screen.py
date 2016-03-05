@@ -60,8 +60,7 @@ font = ImageFont.load_default()
 class basicWeather(object):
 
     def __init__(self):
-        self.chesterWeather = 'http://api.wunderground.com/api/080b28233d8a1a49/geolookup/conditions/q/UK/%s.json' % 'chester'
-#        self.chesterWeather = 'http://api.wunderground.com/api/ADDKEYHERE/geolookup/conditions/q/UK/%s.json' % 'chester'
+        self.chesterWeather = 'http://api.wunderground.com/api/ADDKEYHERE/geolookup/conditions/q/UK/%s.json' % 'chester'
 
     def run(self):
         self.chesterRead()
@@ -107,7 +106,7 @@ class basicWeather(object):
             strip.show()
 
         elif 0 < temp_c <= 10:
-            strip.setPixelColorRGB(0,0,127,127) # Aqua    
+            strip.setPixelColorRGB(0,127,0,127) # Aqua    
             strip.show()
 
         elif 10 < temp_c <= 20:
