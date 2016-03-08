@@ -3,15 +3,16 @@
 
 import urllib2, json, os
 
-# ---- ws2812 stuff ----
-import time
-from neopixel import *
 # ---- BMP180 stuff ----
 import Adafruit_BMP.BMP085 as BMP085
 sensor = BMP085.BMP085()
 
+# ---- ws2812 stuff ----
+import time
+from neopixel import *
+
 # LED strip configuration:
-LED_COUNT = 16 # Number of LED pixels.
+LED_COUNT = 8 # Number of LED pixels.
 LED_PIN = 12 # GPIO pin connected to the pixels (must support PWM!) 
 LED_FREQ_HZ = 800000 # LED signal frequency in hertz (usually 800khz)
 LED_DMA = 5 # DMA channel to use for generating signal (try 5)
@@ -55,8 +56,6 @@ draw = ImageDraw.Draw(image)
 font = ImageFont.load_default()
 # ---- Screen stuff ----
 
-
-
 class basicWeather(object):
 
     def __init__(self):
@@ -64,9 +63,9 @@ class basicWeather(object):
 
     def run(self):
         self.chesterRead()
-#        self.broughtonRead()
 
     def chesterRead(self):
+        ledNumber = 0
         f = urllib2.urlopen(self.chesterWeather)
         json_string = f.read()
         parsed_json = json.loads(json_string)
@@ -76,8 +75,7 @@ class basicWeather(object):
         weather = parsed_json['current_observation']['weather']
         wind = parsed_json['current_observation']['wind_mph']
         wind_dir = parsed_json['current_observation']['wind_dir']
-        rain = parsed_json['current_observation']['precip_1hr_metric']
-        f.close()
+        rain = parsed_json['current_observation']['precip_1hr_metric'] f.close()
 
         print "----------------------------------"
         print "Weather in %s" % location
@@ -93,6 +91,8 @@ class basicWeather(object):
         print "wind direction - %s " % wind_dir
         print "----------------------------------"
         print "Inside temp - %0.1fC" % sensor.read_temperature()
+        print "----------------------------------"
+        print "\n"
 
         draw.text((0, 0),"Weather in %s" % location,  font=font, fill=255)
         draw.text((0, 10), "%s" % weather, font=font, fill=255)
@@ -100,33 +100,54 @@ class basicWeather(object):
         draw.text((0, 30), "Feels like - %sC" % feels, font=font, fill=255)
         draw.text((0, 40), "Inside temp - %0.1fC" % sensor.read_temperature(), font=font, fill=255)
         draw.text((0, 50), "wind - %s Mph %s" % (wind,wind_dir), font=font, fill=255)
+        # Display image.
+        disp.image(image)
+        disp.display()
 
         if temp_c < 0:
             strip.setPixelColorRGB(0,0,0,255) # Blue    
             strip.show()
 
-        elif 0 < temp_c <= 10:
-            strip.setPixelColorRGB(0,127,0,127) # Aqua    
-            strip.show()
-
-        elif 10 < temp_c <= 20:
-            strip.setPixelColorRGB(0,127,127,0) # Yellow  
-            strip.show()
-
-        elif 20 < temp_c <= 30:
-            strip.setPixelColorRGB(0,255,127,0) # Orange  
-            strip.show()
+        elif 0.1 < temp_c <= 10:
+        
+            mappedTemp = 0 + (7 - 0) * ((temp_c - 0) / (10 - 0));
+            print "Number of led's %d " % int(mappedTemp)
             
-        elif 30 < temp_c <= 40:
-            strip.setPixelColorRGB(0,255,0,0) # Red  
-            strip.show()
-         
-        # Display image.
-        disp.image(image)
-        disp.display()
-        print "----------------------------------"
-        print "\n"
+            while (ledNumber <= int(mappedTemp)):
+                print ledNumber
+                strip.setPixelColorRGB(ledNumber,127,0,127) # Aqua    
+                ledNumber = ledNumber + 1
+                strip.show()
 
+        elif 10.1 < temp_c <= 20:
+        
+            mappedTemp = 0 + (7 - 0) * ((temp_c - 0) / (20 - 10));
+            print "Number of led's %d " % int(mappedTemp)
+            
+            while (ledNumber < int(mappedTemp)):
+                strip.setPixelColorRGB(ledNumber,127,127,0) # Yellow   
+                ledNumber = ledNumber + 1
+                strip.show()
+
+        elif 20.1 < temp_c <= 30:
+        
+            mappedTemp = 0 + (7 - 0) * ((temp_c - 0) / (30 - 20));
+            print "Number of led's %d " % int(mappedTemp)
+            
+            while (ledNumber < int(mappedTemp)):
+                strip.setPixelColorRGB(ledNumber,255,127,0) # orange   
+                ledNumber = ledNumber + 1
+                strip.show()
+
+        elif 30.1 < temp_c <= 40:
+        
+            mappedTemp = 0 + (7 - 0) * ((temp_c - 0) / (40 - 30));
+            print "Number of led's %d " % int(mappedTemp)
+            
+            while (ledNumber < int(mappedTemp)):
+                strip.setPixelColorRGB(ledNumber,255,0,0) # red    
+                ledNumber = ledNumber + 1
+                strip.show()
 
 if __name__ == '__main__':
     start = basicWeather()
