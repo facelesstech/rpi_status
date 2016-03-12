@@ -75,7 +75,8 @@ class basicWeather(object):
         weather = parsed_json['current_observation']['weather']
         wind = parsed_json['current_observation']['wind_mph']
         wind_dir = parsed_json['current_observation']['wind_dir']
-        rain = parsed_json['current_observation']['precip_1hr_metric'] f.close()
+        rain = parsed_json['current_observation']['precip_1hr_metric']
+        f.close()
 
         print "----------------------------------"
         print "Weather in %s" % location
@@ -110,7 +111,7 @@ class basicWeather(object):
 
         elif 0.1 < temp_c <= 10:
         
-            mappedTemp = 0 + (7 - 0) * ((temp_c - 0) / (10 - 0));
+            mappedTemp = temp_c / 1.25 
             print "Number of led's %d " % int(mappedTemp)
             
             while (ledNumber <= int(mappedTemp)):
@@ -121,17 +122,18 @@ class basicWeather(object):
 
         elif 10.1 < temp_c <= 20:
         
-            mappedTemp = 0 + (7 - 0) * ((temp_c - 0) / (20 - 10));
+            convert_temp_c = temp_c - 10        
+            mappedTemp = convert_temp_c / 1.25 
             print "Number of led's %d " % int(mappedTemp)
             
-            while (ledNumber < int(mappedTemp)):
+            while (ledNumber <= int(mappedTemp)):
                 strip.setPixelColorRGB(ledNumber,127,127,0) # Yellow   
                 ledNumber = ledNumber + 1
                 strip.show()
 
         elif 20.1 < temp_c <= 30:
-        
-            mappedTemp = 0 + (7 - 0) * ((temp_c - 0) / (30 - 20));
+            convert_temp_c = temp_c - 20        
+            mappedTemp = convert_temp_c / 1.25 
             print "Number of led's %d " % int(mappedTemp)
             
             while (ledNumber < int(mappedTemp)):
@@ -140,8 +142,8 @@ class basicWeather(object):
                 strip.show()
 
         elif 30.1 < temp_c <= 40:
-        
-            mappedTemp = 0 + (7 - 0) * ((temp_c - 0) / (40 - 30));
+            convert_temp_c = temp_c -30        
+            mappedTemp = convert_temp_c / 1.25 
             print "Number of led's %d " % int(mappedTemp)
             
             while (ledNumber < int(mappedTemp)):
