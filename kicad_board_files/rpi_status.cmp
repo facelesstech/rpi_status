@@ -1,0 +1,73 @@
+Cmp-Mod V01 Created by CvPcb (22-Jun-2014 BZR 4027)-stable date = Wed 17 Feb 2016 19:58:04 GMT
+
+BeginCmp
+TimeStamp = /56BCC2A8;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = led_3mm_custom;
+EndCmp
+
+BeginCmp
+TimeStamp = /56BCC2DD;
+Reference = R1;
+ValeurCmp = R;
+IdModule  = R3-5;
+EndCmp
+
+BeginCmp
+TimeStamp = /56BCBEB0;
+Reference = SW1;
+ValeurCmp = SW_PUSH;
+IdModule  = button_single_custom;
+EndCmp
+
+BeginCmp
+TimeStamp = /56BCBE92;
+Reference = SW2;
+ValeurCmp = SW_PUSH;
+IdModule  = button_single_custom;
+EndCmp
+
+BeginCmp
+TimeStamp = /56BCBEA1;
+Reference = SW3;
+ValeurCmp = SW_PUSH;
+IdModule  = button_single_custom;
+EndCmp
+
+BeginCmp
+TimeStamp = /56BCBEBF;
+Reference = SW4;
+ValeurCmp = SW_PUSH;
+IdModule  = button_single_custom;
+EndCmp
+
+BeginCmp
+TimeStamp = /56BCBE72;
+Reference = U1;
+ValeurCmp = SSD1306(OLED_I2C);
+IdModule  = ssd1306_oled_screen;
+EndCmp
+
+BeginCmp
+TimeStamp = /56BF80ED;
+Reference = U2;
+ValeurCmp = BMP180;
+IdModule  = BMP180;
+EndCmp
+
+BeginCmp
+TimeStamp = /56BCC473;
+Reference = U3;
+ValeurCmp = WS2812_RING;
+IdModule  = ws2812_ring_custom;
+EndCmp
+
+BeginCmp
+TimeStamp = /56BCF801;
+Reference = U4;
+ValeurCmp = RASPBERRY_PI_HEADER;
+IdModule  = raspberry_pi_GPIO_header;
+EndCmp
+
+EndListe
