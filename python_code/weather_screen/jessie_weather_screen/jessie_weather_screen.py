@@ -16,8 +16,8 @@ LED_COUNT = 8 # Number of LED pixels.
 LED_PIN = 12 # GPIO pin connected to the pixels (must support PWM!) 
 LED_FREQ_HZ = 800000 # LED signal frequency in hertz (usually 800khz)
 LED_DMA = 5 # DMA channel to use for generating signal (try 5)
-#LED_BRIGHTNESS = 255 # Set to 0 for darkest and 255 for brightest
-LED_BRIGHTNESS = 127 # Set to 0 for darkest and 255 for brightest
+#LED_BRIGHTNESS = 127 # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS = 255 # Set to 0 for darkest and 255 for brightest
 LED_INVERT = False # True to invert the signal (when using NPN transistor level shift)
 
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
@@ -60,7 +60,8 @@ font = ImageFont.load_default()
 class basicWeather(object):
 
     def __init__(self):
-        self.chesterWeather = 'http://api.wunderground.com/api/ADDKEYHERE/geolookup/conditions/q/UK/%s.json' % 'chester'
+        #self.chesterWeather = 'http://api.wunderground.com/api/ADDKEYHERE/geolookup/conditions/q/UK/%s.json' % 'chester'
+        self.chesterWeather = 'http://api.wunderground.com/api/080b28233d8a1a49/geolookup/conditions/q/UK/%s.json' % 'chester'
 
     def run(self):
         self.chesterRead()
@@ -79,29 +80,30 @@ class basicWeather(object):
         rain = parsed_json['current_observation']['precip_1hr_metric']
         f.close()
 
-        print "----------------------------------"
-        print "Weather in %s" % location
-        print "----------------------------------"
-        print "Current weather - %s" % weather
-        print "Temp - %sC" % temp_c
-        print "Feels like - %sC" % feels
-        print "rain this hour - %s Cm" % rain
-        print "----------------------------------"
-        print "Chester wind"
-        print "----------------------------------"
-        print "wind - %s Mph" % wind
-        print "wind direction - %s " % wind_dir
-        print "----------------------------------"
-        print "Inside temp - %0.1fC" % sensor.read_temperature()
-        print "----------------------------------"
-        print "\n"
+#        print "----------------------------------"
+#        print "Weather in %s" % location
+#        print "----------------------------------"
+#        print "Current weather - %s" % weather
+#        print "Temp - %sC" % temp_c
+#        print "Feels like - %sC" % feels
+#        print "rain this hour - %s Cm" % rain
+#        print "----------------------------------"
+#        print "Chester wind"
+#        print "----------------------------------"
+#        print "wind - %s Mph" % wind
+#        print "wind direction - %s " % wind_dir
+#        print "----------------------------------"
+#        print "Inside temp - %0.1fC" % sensor.read_temperature()
+#        print "----------------------------------"
+#        print "\n"
 
-        draw.text((0, 0),"Weather in %s" % location,  font=font, fill=255)
-        draw.text((0, 10), "%s" % weather, font=font, fill=255)
-        draw.text((0, 20), "Temp - %sC" % temp_c, font=font, fill=255)
-        draw.text((0, 30), "Feels like - %sC" % feels, font=font, fill=255)
-        draw.text((0, 40), "Inside temp - %0.1fC" % sensor.read_temperature(), font=font, fill=255)
-        draw.text((0, 50), "wind - %s Mph %s" % (wind,wind_dir), font=font, fill=255)
+#        draw.text((0, 0),"Weather in %s" % location,  font=font, fill=255)
+        draw.text((0, 0), "%s" % weather, font=font, fill=255)
+        draw.text((0, 10), "Temp - %sC" % temp_c, font=font, fill=255)
+        draw.text((0, 20), "Feels like - %sC" % feels, font=font, fill=255)
+        draw.text((0, 30), "Inside temp - %0.1fC" % sensor.read_temperature(), font=font, fill=255)
+        draw.text((0, 40), "wind - %s Mph %s" % (wind,wind_dir), font=font, fill=255)
+        draw.text((0, 50), "Rain this hour -%sCM" % (rain), font=font, fill=255)
         # Display image.
         disp.image(image)
         disp.display()
@@ -117,7 +119,7 @@ class basicWeather(object):
             
             while (ledNumber <= int(mappedTemp)):
                 print ledNumber
-                strip.setPixelColorRGB(ledNumber,127,0,127) # Aqua    
+                strip.setPixelColorRGB(ledNumber,0,255,255) # Aqua    
                 ledNumber = ledNumber + 1
                 strip.show()
 
@@ -128,7 +130,7 @@ class basicWeather(object):
             print "Number of led's %d " % int(mappedTemp)
             
             while (ledNumber <= int(mappedTemp)):
-                strip.setPixelColorRGB(ledNumber,127,127,0) # Yellow   
+                strip.setPixelColorRGB(ledNumber,255,255,0) # Yellow   
                 ledNumber = ledNumber + 1
                 strip.show()
 
@@ -139,6 +141,7 @@ class basicWeather(object):
             
             while (ledNumber < int(mappedTemp)):
                 strip.setPixelColorRGB(ledNumber,127,255,0) # orange   
+#                strip.setPixelColorRGB(ledNumber,0,255,0) # red    
                 ledNumber = ledNumber + 1
                 strip.show()
 
